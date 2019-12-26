@@ -102,8 +102,12 @@ public class Sharded<R, S extends ShardInfo<R>> {
 
     private void initialize(List<S> shards) {
         // TODO: make sure all nodes and resources are not leaking
-        nodes.clear();
-        resources.clear();
+        if (nodes != null) {
+            nodes.clear();
+        }
+        if (resources != null) {
+            resources.clear();
+        }
 
         nodes = new TreeMap<Long, S>();
         for (int i = 0; i != shards.size(); ++i) {
